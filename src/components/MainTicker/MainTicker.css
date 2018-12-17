@@ -1,0 +1,10 @@
+.ticker {
+  border: 1px solid #636363;
+  display: flex;
+  padding: 10px;
+  margin: 10px;
+}
+
+.ticker__column {
+  padding: 0 10px;
+}

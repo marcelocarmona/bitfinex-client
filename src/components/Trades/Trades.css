@@ -1,0 +1,14 @@
+.trade {
+  display: flex;
+  border: 1px solid #636363;
+  padding: 10px;
+  margin: 10px;
+}
+
+.trade--bought {
+  background-color: seagreen;
+}
+
+.trade--sold {
+  background-color: darkred;
+}
