@@ -20,9 +20,9 @@ export function tickerConnection() {
   // default symbol
   const symbol = 'tBTCUSD';
   return function(dispatch) {
-    const w = new WebSocket('wss://api.bitfinex.com/ws/2');
+    const ws = new WebSocket('wss://api.bitfinex.com/ws/2');
 
-    w.addEventListener('message', msg => {
+    ws.addEventListener('message', msg => {
       const data = JSON.parse(msg.data);
       if (data.event === 'subscribed') {
         dispatch(updateTicker({ pair: data.pair }));
@@ -66,6 +66,14 @@ export function tickerConnection() {
       channel: 'ticker',
       symbol
     });
-    w.addEventListener('open', () => w.send(msg));
+    ws.addEventListener('open', () => ws.send(msg));
+    ws.addEventListener('error', error => {
+      console.error(
+        'Socket encountered error: ',
+        error.message,
+        'Closing socket'
+      );
+      ws.close();
+    });
   };
 }
