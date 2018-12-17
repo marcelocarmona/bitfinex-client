@@ -5,14 +5,14 @@ import OrderBook from './components/OrderBook/OrderBook';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import ticker from './store/ticker/reducer';
-import orderBook from './store/orderBook/reducer';
+import book from './store/orderBook/reducer';
 import trades from './store/trades/reducer';
 import thunk from 'redux-thunk';
 import './App.css';
 
 const reducers = {
   ticker,
-  orderBook,
+  book,
   trades
 };
 

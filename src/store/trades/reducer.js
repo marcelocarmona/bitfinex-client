@@ -4,7 +4,7 @@ const initialState = {
   tBTCUSD: []
 };
 
-function ticker(state = initialState, action) {
+function trades(state = initialState, action) {
   switch (action.type) {
     case TRADE_UPDATE_MESSAGE:
       return {
@@ -24,4 +24,4 @@ function ticker(state = initialState, action) {
   }
 }
 
-export default ticker;
+export default trades;
