@@ -23,7 +23,6 @@ class Traders extends PureComponent {
         } else if (streamFields !== 'hb' && streamFields !== 'te') {
           const trades = streamFields;
           this.setState({ trades });
-          console.log(msg);
         }
       }
     });

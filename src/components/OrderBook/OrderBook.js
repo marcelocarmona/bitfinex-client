@@ -28,8 +28,6 @@ class OrderBook extends PureComponent {
           // newBooks[price] = streamFields;
           // this.setState({ books: newBooks });
         }
-
-        console.log(msg);
       }
     });
 
