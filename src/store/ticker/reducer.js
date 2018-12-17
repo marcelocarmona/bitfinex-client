@@ -1,7 +1,7 @@
-import { TICKER_OPEN, TICKER_UPDATE_MESSAGE, TICKER_CLOSE } from './actions';
+import { TICKER_UPDATE_MESSAGE } from './actions';
 
 const initialState = {
-  connected: false,
+  pair: 'BTCUSD',
   BID: 0,
   BID_SIZE: 0,
   ASK: 0,
@@ -16,22 +16,11 @@ const initialState = {
 
 function ticker(state = initialState, action) {
   switch (action.type) {
-    case TICKER_OPEN:
-      return {
-        ...state,
-        connected: true
-      };
     case TICKER_UPDATE_MESSAGE:
       return {
         ...state,
         ...action.payload
       };
-    case TICKER_CLOSE:
-      return {
-        ...state,
-        connected: false
-      };
-
     default:
       return state;
   }

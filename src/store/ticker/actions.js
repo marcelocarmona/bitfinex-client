@@ -2,38 +2,23 @@
  * action types
  */
 
-export const TICKER_OPEN = 'TICKER_OPEN';
 export const TICKER_UPDATE_MESSAGE = 'TICKER-UPDATE_MESSAGE';
-export const TICKER_CLOSE = 'TICKER_CLOSE';
 
 /*
  * action creators
  */
 
-export function openTickerConnection() {
-  return {
-    type: TICKER_OPEN,
-    payload: {
-      event: 'subscribe',
-      channel: 'trades',
-      symbol: 'tBTCUSD'
-    }
-  };
-}
-
 export function updateTicker(payload) {
   return { type: TICKER_UPDATE_MESSAGE, payload };
 }
 
-export function stopTickerConnection(payload) {
-  return { type: TICKER_CLOSE, payload };
-}
-
 /*
- * thunks actions
+ * thunk actions
  */
 
 export function tickerConnection() {
+  // default symbol
+  const symbol = 'tBTCUSD';
   return function(dispatch) {
     const w = new WebSocket('wss://api.bitfinex.com/ws/2');
 
@@ -76,10 +61,10 @@ export function tickerConnection() {
       }
     });
 
-    let msg = JSON.stringify({
+    const msg = JSON.stringify({
       event: 'subscribe',
       channel: 'ticker',
-      symbol: 'tBTCUSD'
+      symbol
     });
     w.addEventListener('open', () => w.send(msg));
   };

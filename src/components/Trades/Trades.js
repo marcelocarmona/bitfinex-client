@@ -1,42 +1,15 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { tradesConnection } from '../../store/trades/actions';
 import './Trades.css';
 
 class Traders extends PureComponent {
-  state = { trades: [] };
   componentDidMount() {
-    const w = new WebSocket('wss://api.bitfinex.com/ws/2');
-
-    w.addEventListener('message', msg => {
-      const data = JSON.parse(msg.data);
-
-      if (data.event === 'subscribed') {
-        this.setState({ pair: data.pair });
-      } else if (data.event === 'info') {
-        //nothing
-      } else {
-        const streamFields = data[1];
-
-        if (streamFields === 'tu') {
-          const newTrade = data[2];
-          const tradesWithoutLastOne = this.state.trades.slice(0, -1);
-          this.setState({ trades: [newTrade, ...tradesWithoutLastOne] });
-        } else if (streamFields !== 'hb' && streamFields !== 'te') {
-          const trades = streamFields;
-          this.setState({ trades });
-        }
-      }
-    });
-
-    let msg = JSON.stringify({
-      event: 'subscribe',
-      channel: 'trades',
-      symbol: 'tBTCUSD'
-    });
-    w.addEventListener('open', () => w.send(msg));
+    this.props.tradesConnection();
   }
 
   render() {
-    const { trades } = this.state;
+    const { trades } = this.props;
     return (
       <div className="trade">
         <table>
@@ -49,7 +22,7 @@ class Traders extends PureComponent {
             </tr>
           </thead>
           <tbody>
-            {trades.map(([ID, MTS, AMOUNT, PRICE]) => (
+            {trades.tBTCUSD.map(([ID, MTS, AMOUNT, PRICE]) => (
               <tr
                 key={ID}
                 className={AMOUNT > 0 ? 'trade--bought' : 'trade--sold'}
@@ -67,4 +40,21 @@ class Traders extends PureComponent {
   }
 }
 
-export default Traders;
+const mapStateToProps = state => {
+  return {
+    trades: state.trades
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    tradesConnection: () => {
+      dispatch(tradesConnection());
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Traders);

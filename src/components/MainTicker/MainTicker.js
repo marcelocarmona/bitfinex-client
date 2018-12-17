@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import './MainTicker.css';
 import { connect } from 'react-redux';
 import { tickerConnection } from '../../store/ticker/actions';
+import './MainTicker.css';
 
 class Ticker extends PureComponent {
   componentDidMount() {
