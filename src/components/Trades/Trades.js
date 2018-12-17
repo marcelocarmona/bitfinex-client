@@ -28,7 +28,7 @@ class Traders extends PureComponent {
                 className={AMOUNT > 0 ? 'trade--bought' : 'trade--sold'}
               >
                 <td>{AMOUNT > 0 ? '🔺' : '🔻'}</td>
-                <td>{new Date(MTS * 1000).toLocaleTimeString()}</td>
+                <td>{new Date(MTS).toLocaleTimeString()}</td>
                 <td>{AMOUNT}</td>
                 <td>{PRICE}</td>
               </tr>
