@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { orderBookConnection } from '../../store/orderBook/actions';
+import {
+  orderBookConnection,
+  orderBookCloseConnection
+} from '../../store/orderBook/actions';
 import './OrderBook.css';
 
 class OrderBook extends PureComponent {
@@ -16,6 +19,16 @@ class OrderBook extends PureComponent {
   changeFrequency = event => {
     event.preventDefault();
     this.props.orderBookConnection(event.target.value);
+  };
+
+  closeConnection = event => {
+    event.preventDefault();
+    this.props.orderBookCloseConnection();
+  };
+
+  openConnection = event => {
+    event.preventDefault();
+    this.props.orderBookConnection();
   };
 
   render() {
@@ -38,6 +51,16 @@ class OrderBook extends PureComponent {
               <option value="P2">P2</option>
               <option value="P3">P3</option>
             </select>
+            &nbsp; &nbsp;
+            {channel.chanId ? (
+              <button onClick={this.closeConnection}>
+                close book connection
+              </button>
+            ) : (
+              <button onClick={this.openConnection}>
+                open book connection
+              </button>
+            )}
           </div>
         )}
         <div className="book">
@@ -95,6 +118,9 @@ const mapDispatchToProps = dispatch => {
   return {
     orderBookConnection: (freq, prec) => {
       dispatch(orderBookConnection(freq, prec));
+    },
+    orderBookCloseConnection: () => {
+      dispatch(orderBookCloseConnection());
     }
   };
 };

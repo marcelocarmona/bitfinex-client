@@ -4,17 +4,22 @@
 
 export const BOOK_SNAPSHOT_MESSAGE = 'BOOK-SNAPSHOT_MESSAGE';
 export const BOOK_UPDATE_MESSAGE = 'BOOK-UPDATE_MESSAGE';
+export const BOOK_UPDATE_CHANNEL = 'BOOK-UPDATE_CHANNEL';
 
 /*
  * action creators
  */
 
-export function updateBook({ channel, payload }) {
-  return { type: BOOK_UPDATE_MESSAGE, channel, payload };
+export function updateBook(payload) {
+  return { type: BOOK_UPDATE_MESSAGE, payload };
 }
 
 export function setSnapshotBook({ channel, payload }) {
   return { type: BOOK_SNAPSHOT_MESSAGE, channel, payload };
+}
+
+export function updateBookChannel(channel) {
+  return { type: BOOK_UPDATE_CHANNEL, channel };
 }
 
 /*
@@ -23,6 +28,7 @@ export function setSnapshotBook({ channel, payload }) {
 
 // websocket cache
 let ws = null;
+
 /**
  * Maintain the book connection, just one connection can exist at the same time
  *
@@ -66,7 +72,7 @@ export function orderBookConnection(frequency, presision) {
           dispatch(setSnapshotBook({ channel, payload: data }));
         } else {
           if (streamFields !== 'hb') {
-            dispatch(updateBook({ channel, payload: data }));
+            dispatch(updateBook(data));
           }
         }
       }
@@ -80,6 +86,19 @@ export function orderBookConnection(frequency, presision) {
         'Closing socket'
       );
       ws.close();
+      dispatch(updateBookChannel({ event: null, chanId: null }));
     });
+  };
+}
+
+/**
+ * Close websocket connection
+ */
+export function orderBookCloseConnection() {
+  return function(dispatch) {
+    if (ws) {
+      ws.close();
+      dispatch(updateBookChannel({ event: null, chanId: null }));
+    }
   };
 }

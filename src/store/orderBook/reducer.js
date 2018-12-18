@@ -1,4 +1,8 @@
-import { BOOK_UPDATE_MESSAGE, BOOK_SNAPSHOT_MESSAGE } from './actions';
+import {
+  BOOK_UPDATE_MESSAGE,
+  BOOK_SNAPSHOT_MESSAGE,
+  BOOK_UPDATE_CHANNEL
+} from './actions';
 
 const initialState = {
   channel: {
@@ -76,6 +80,14 @@ function book(state = initialState, action) {
       }
       return {
         ...state
+      };
+    case BOOK_UPDATE_CHANNEL:
+      return {
+        ...state,
+        channel: {
+          ...state.channel,
+          ...action.channel
+        }
       };
     default:
       return state;
