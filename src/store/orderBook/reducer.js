@@ -1,6 +1,16 @@
 import { BOOK_UPDATE_MESSAGE, BOOK_SNAPSHOT_MESSAGE } from './actions';
 
 const initialState = {
+  channel: {
+    event: null,
+    channel: 'book',
+    chanId: null,
+    symbol: 'tBTCUSD',
+    prec: 'P0',
+    freq: 'F1',
+    len: '25',
+    pair: 'BTCUSD'
+  },
   asks: {},
   bids: {}
 };
@@ -8,8 +18,8 @@ const initialState = {
 function book(state = initialState, action) {
   switch (action.type) {
     case BOOK_SNAPSHOT_MESSAGE:
-      const books = action.payload[1];
-      return books.reduce(
+      let books = action.payload[1];
+      books = books.reduce(
         (acc, [price, count, amount], currentIndex) =>
           currentIndex < 25
             ? {
@@ -22,6 +32,7 @@ function book(state = initialState, action) {
               },
         initialState
       );
+      return { ...books, channel: action.channel };
     case BOOK_UPDATE_MESSAGE:
       /*
         when count > 0 then you have to add or update the price level

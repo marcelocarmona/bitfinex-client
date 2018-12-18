@@ -21,13 +21,39 @@ export function setSnapshotBook({ channel, payload }) {
  * thunk actions
  */
 
-export function orderBookConnection() {
-  // default symbol
-  const symbol = 'tBTCUSD';
-  let channel = null;
+// websocket cache
+let ws = null;
+/**
+ * Maintain the book connection, just one connection can exist at the same time
+ *
+ * @param {string} frequency Frequency of updates (F0, F1).F0=realtime / F1=2sec
+ * @param {string} presision Level of price aggregation (P0, P1, P2, P3)
+ */
+export function orderBookConnection(frequency, presision) {
   return function(dispatch, state) {
-    const ws = new WebSocket('wss://api.bitfinex.com/ws/2');
+    // check if no exist a current connection
+    if (!ws) {
+      ws = new WebSocket('wss://api.bitfinex.com/ws/2');
+    } else {
+      ws.close();
+      ws = new WebSocket('wss://api.bitfinex.com/ws/2');
+    }
 
+    // open
+    ws.addEventListener('open', () => {
+      const { symbol, freq, prec } = state().book.channel;
+      const msg = JSON.stringify({
+        event: 'subscribe',
+        channel: 'book',
+        symbol,
+        freq: frequency ? frequency : freq,
+        prec: presision ? presision : prec
+      });
+      ws.send(msg);
+    });
+
+    // message
+    let channel = null;
     ws.addEventListener('message', msg => {
       const data = JSON.parse(msg.data);
       if (data.event === 'subscribed') {
@@ -46,12 +72,7 @@ export function orderBookConnection() {
       }
     });
 
-    let msg = JSON.stringify({
-      event: 'subscribe',
-      channel: 'book',
-      symbol
-    });
-    ws.addEventListener('open', () => ws.send(msg));
+    // error
     ws.addEventListener('error', error => {
       console.error(
         'Socket encountered error: ',
