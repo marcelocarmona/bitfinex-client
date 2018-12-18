@@ -1,13 +1,13 @@
 {
-  "main.css": "/static/css/main.16ac9efe.chunk.css",
-  "main.js": "/static/js/main.e57d9010.chunk.js",
-  "main.js.map": "/static/js/main.e57d9010.chunk.js.map",
-  "static/js/1.be85f306.chunk.js": "/static/js/1.be85f306.chunk.js",
-  "static/js/1.be85f306.chunk.js.map": "/static/js/1.be85f306.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/css/main.16ac9efe.chunk.css.map": "/static/css/main.16ac9efe.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.0d1c1bc634d84ef87db33e62bbffc917.js": "/precache-manifest.0d1c1bc634d84ef87db33e62bbffc917.js",
-  "service-worker.js": "/service-worker.js"
+  "main.css": "/bitfinex-client/static/css/main.16ac9efe.chunk.css",
+  "main.js": "/bitfinex-client/static/js/main.278b8ec3.chunk.js",
+  "main.js.map": "/bitfinex-client/static/js/main.278b8ec3.chunk.js.map",
+  "static/js/1.be85f306.chunk.js": "/bitfinex-client/static/js/1.be85f306.chunk.js",
+  "static/js/1.be85f306.chunk.js.map": "/bitfinex-client/static/js/1.be85f306.chunk.js.map",
+  "runtime~main.js": "/bitfinex-client/static/js/runtime~main.096dc267.js",
+  "runtime~main.js.map": "/bitfinex-client/static/js/runtime~main.096dc267.js.map",
+  "static/css/main.16ac9efe.chunk.css.map": "/bitfinex-client/static/css/main.16ac9efe.chunk.css.map",
+  "index.html": "/bitfinex-client/index.html",
+  "precache-manifest.1b19d94715c6d126e18a4256458db0ef.js": "/bitfinex-client/precache-manifest.1b19d94715c6d126e18a4256458db0ef.js",
+  "service-worker.js": "/bitfinex-client/service-worker.js"
 }
