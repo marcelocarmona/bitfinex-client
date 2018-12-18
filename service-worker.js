@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/bitfinex-client/precache-manifest.1b19d94715c6d126e18a4256458db0ef.js"
+  "/bitfinex-client/precache-manifest.7397e1a076753214ea5a64508125a91e.js"
 );
 
 workbox.clientsClaim();

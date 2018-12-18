@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/bitfinex-client/static/js/runtime~main.096dc267.js"
   },
   {
-    "revision": "278b8ec3f480284314dd",
-    "url": "/bitfinex-client/static/js/main.278b8ec3.chunk.js"
+    "revision": "5f4477803802b5747e51",
+    "url": "/bitfinex-client/static/js/main.5f447780.chunk.js"
   },
   {
     "revision": "be85f3065a3ec51849f0",
     "url": "/bitfinex-client/static/js/1.be85f306.chunk.js"
   },
   {
-    "revision": "278b8ec3f480284314dd",
+    "revision": "5f4477803802b5747e51",
     "url": "/bitfinex-client/static/css/main.16ac9efe.chunk.css"
   },
   {
-    "revision": "5d245f2b7f65ce66156d80323839546f",
+    "revision": "b5f79fdef85fdd8424ac81c692c02348",
     "url": "/bitfinex-client/index.html"
   }
 ];
